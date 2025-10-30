@@ -7,7 +7,7 @@
 }
 
 body {
-    background: url("FondoGym.jpg") no-repeat center center/cover;
+    background: url("") no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,7 +114,7 @@ form button:hover {
 
 .overlay {
     background: linear-gradient(to right, rgba(231,39,39,0.85), rgba(36,59,85,0.85)),
-    url("gym.jpg") no-repeat center center/cover;
+    url(https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3ltfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000) no-repeat center center/cover;
     color: #fff;
     position: relative;
     left: -100%;

@@ -8,18 +8,21 @@ public class PaginasController {
 
     @GetMapping("/inicio")
     public String mostrarInicio() {
-        return "inicio";
+        return "usuario/inicio";
     }
 
     @GetMapping("/anuncio")
     public String mostrarAnuncio() {
-        return "anuncio";
+        return "usuario/anuncio";
     }
 
     @GetMapping("/contacto")
     public String mostrarContacto() {
-        return "contacto";
+        return "usuario/contacto";
     }
 
-
+    @GetMapping("/login")
+    public String mostrarLogin() {
+        return "login/login";
+    }
 }

@@ -14,7 +14,7 @@
   </head>
   <body>
 
-  <%@ include file='Usuario/barra_tareas.jsp' %>
+  <%@ include file="barra_tareas.jsp" %>
 
     <div class="container">
       <header class="header">
