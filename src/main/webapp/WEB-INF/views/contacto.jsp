@@ -103,4 +103,6 @@
     </div>
     <script src="navegacion.js"></script>
   </body>
+
+  <%@ include file="footer.jsp" %>
 </html>
