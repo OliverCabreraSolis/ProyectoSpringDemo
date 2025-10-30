@@ -15,4 +15,9 @@ public class PaginasController {
     public String mostrarAnuncio() {
         return "anuncio";
     }
+
+    @GetMapping("/contacto")
+    public String mostrarContacto() {
+        return "contacto";
+    }
 }
