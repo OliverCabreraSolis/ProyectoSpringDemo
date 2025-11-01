@@ -1,7 +1,7 @@
 package com.example.GymFlow.Controller.Admin;
 
-import com.gymflow.model.Plan;
-import com.gymflow.service.PlanService;
+import com.example.GymFlow.Model.Plan;
+import com.example.GymFlow.Service.PlanService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

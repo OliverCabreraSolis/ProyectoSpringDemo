@@ -1,7 +1,7 @@
 package com.example.GymFlow.Service;
 
-import com.gymflow.model.Plan;
-import com.gymflow.repository.PlanRepository;
+import com.example.GymFlow.Model.Plan;
+import com.example.GymFlow.Repository.PlanRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

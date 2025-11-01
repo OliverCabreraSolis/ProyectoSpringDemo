@@ -1,7 +1,7 @@
 package com.example.GymFlow.Controller.Admin;
 
-import com.gymflow.model.Plan;
-import com.gymflow.service.PlanService;
+import com.example.GymFlow.Model.Plan;
+import com.example.GymFlow.Service.PlanService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +26,6 @@ public class PlanController {
                 ? planService.listar()
                 : planService.listarPorDuracion(duracion);
         model.addAttribute("planes", planes);
-        return "admin/planes"; // JSP
+        return "admin/planesCRUD"; // JSP
     }
 }
