@@ -1,6 +1,4 @@
-package com.example.demo;
-
-import java.time.LocalDate;
+package com.example.GymFlow;
 
 public class usuario {
     private int id;

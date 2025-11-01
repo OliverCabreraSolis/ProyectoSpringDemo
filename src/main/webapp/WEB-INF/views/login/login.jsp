@@ -1,7 +1,4 @@
-
 <link rel="stylesheet" href="/css/login_styles.css">
-
-
 
 <!DOCTYPE html>
 <html lang="es">
