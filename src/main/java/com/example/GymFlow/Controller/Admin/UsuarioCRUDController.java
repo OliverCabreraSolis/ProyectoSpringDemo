@@ -11,8 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin/usuarios")
-public class UsuarioController {
+@RequestMapping("admin/usuario")
+public class UsuarioCRUDController {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -47,7 +47,7 @@ public class UsuarioController {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         try {
-            Usuario usuario = usuarioService.obtenerPorId(id)
+            Usuario usuario = usuarioService.obtenerPorId(Math.toIntExact(id))
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
             List<Usuario> usuarios = usuarioService.obtenerTodos();
             model.addAttribute("usuarios", usuarios);
@@ -64,7 +64,7 @@ public class UsuarioController {
     @PostMapping("/actualizar/{id}")
     public String actualizar(@PathVariable Long id, @ModelAttribute Usuario usuario, RedirectAttributes redirectAttributes) {
         try {
-            usuarioService.actualizar(id, usuario);
+            usuarioService.actualizar(Math.toIntExact(id), usuario);
             redirectAttributes.addFlashAttribute("mensaje", "Usuario actualizado exitosamente");
             redirectAttributes.addFlashAttribute("tipo", "success");
         } catch (Exception e) {
@@ -77,21 +77,8 @@ public class UsuarioController {
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            usuarioService.eliminar(id);
+            usuarioService.eliminar(Math.toIntExact(id));
             redirectAttributes.addFlashAttribute("mensaje", "Usuario eliminado exitosamente");
-            redirectAttributes.addFlashAttribute("tipo", "success");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("mensaje", "Error: " + e.getMessage());
-            redirectAttributes.addFlashAttribute("tipo", "error");
-        }
-        return "redirect:/usuarios";
-    }
-
-    @GetMapping("/cambiar-estado/{id}")
-    public String cambiarEstado(@PathVariable Long id, @RequestParam Boolean activo, RedirectAttributes redirectAttributes) {
-        try {
-            usuarioService.cambiarEstado(id, activo);
-            redirectAttributes.addFlashAttribute("mensaje", "Estado actualizado");
             redirectAttributes.addFlashAttribute("tipo", "success");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("mensaje", "Error: " + e.getMessage());

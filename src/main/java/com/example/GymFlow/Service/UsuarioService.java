@@ -6,6 +6,7 @@ import com.example.GymFlow.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,78 +17,62 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // Obtener todos los usuarios
     public List<Usuario> obtenerTodos() {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> obtenerPorId(Long id) {
+    // Obtener usuario por ID
+    public Optional<Usuario> obtenerPorId(Integer id) {
         return usuarioRepository.findById(id);
     }
 
-    public Optional<Usuario> obtenerPorUsername(String username) {
-        return usuarioRepository.findByUsername(username);
+    // Obtener usuario por correo
+    public Optional<Usuario> obtenerPorCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo);
     }
 
+    // Obtener usuarios por rol
     public List<Usuario> obtenerPorRol(Rol rol) {
         return usuarioRepository.findByRol(rol);
     }
 
+    // Buscar usuarios por nombre (contenga texto)
     public List<Usuario> buscarPorNombre(String texto) {
-        return usuarioRepository.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(texto, texto);
+        return usuarioRepository.findByNombreContainingIgnoreCase(texto);
     }
 
+    // Crear un usuario
     public Usuario crear(Usuario usuario) {
-        if (usuarioRepository.existsByUsername(usuario.getUsername())) {
-            throw new RuntimeException("El username ya existe");
-        }
-        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
-            throw new RuntimeException("El email ya existe");
+        if (usuarioRepository.existsByCorreo(usuario.getCorreo())) {
+            throw new RuntimeException("El correo ya existe");
         }
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario actualizar(Long id, Usuario usuarioActualizado) {
+    // Actualizar un usuario
+    public Usuario actualizar(Integer id, Usuario usuarioActualizado) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        if (!usuario.getUsername().equals(usuarioActualizado.getUsername())
-                && usuarioRepository.existsByUsername(usuarioActualizado.getUsername())) {
-            throw new RuntimeException("El username ya existe");
-        }
-
-        if (!usuario.getEmail().equals(usuarioActualizado.getEmail())
-                && usuarioRepository.existsByEmail(usuarioActualizado.getEmail())) {
-            throw new RuntimeException("El email ya existe");
+        if (!usuario.getCorreo().equals(usuarioActualizado.getCorreo())
+                && usuarioRepository.existsByCorreo(usuarioActualizado.getCorreo())) {
+            throw new RuntimeException("El correo ya existe");
         }
 
         usuario.setNombre(usuarioActualizado.getNombre());
-        usuario.setApellido(usuarioActualizado.getApellido());
-        usuario.setEmail(usuarioActualizado.getEmail());
-        usuario.setTelefono(usuarioActualizado.getTelefono());
-        usuario.setUsername(usuarioActualizado.getUsername());
+        usuario.setCorreo(usuarioActualizado.getCorreo());
+        usuario.setContrasena(usuarioActualizado.getContrasena());
         usuario.setRol(usuarioActualizado.getRol());
-        usuario.setActivo(usuarioActualizado.getActivo());
-        usuario.setDireccion(usuarioActualizado.getDireccion());
-        usuario.setDni(usuarioActualizado.getDni());
-
-        if (usuarioActualizado.getPassword() != null && !usuarioActualizado.getPassword().isEmpty()) {
-            usuario.setPassword(usuarioActualizado.getPassword());
-        }
 
         return usuarioRepository.save(usuario);
     }
 
-    public void eliminar(Long id) {
+    // Eliminar un usuario
+    public void eliminar(Integer id) {
         if (!usuarioRepository.existsById(id)) {
             throw new RuntimeException("Usuario no encontrado");
         }
         usuarioRepository.deleteById(id);
-    }
-
-    public Usuario cambiarEstado(Long id, Boolean activo) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        usuario.setActivo(activo);
-        return usuarioRepository.save(usuario);
     }
 }

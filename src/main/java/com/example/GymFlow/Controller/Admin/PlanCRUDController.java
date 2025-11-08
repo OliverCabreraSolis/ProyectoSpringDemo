@@ -12,11 +12,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/planes")
-public class PlanController {
+public class PlanCRUDController {
 
     private final PlanService planService;
 
-    public PlanController(PlanService planService) {
+    public PlanCRUDController(PlanService planService) {
         this.planService = planService;
     }
 

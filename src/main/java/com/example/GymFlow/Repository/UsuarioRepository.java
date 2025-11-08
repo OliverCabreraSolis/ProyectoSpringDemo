@@ -4,16 +4,22 @@ import com.example.GymFlow.Model.Usuario;
 import com.example.GymFlow.Model.Usuario.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    Optional<Usuario> findByUsername(String username);
-    Optional<Usuario> findByEmail(String email);
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+
+    // Buscar por correo
+    Optional<Usuario> findByCorreo(String correo);
+
+    // Buscar por rol
     List<Usuario> findByRol(Rol rol);
-    List<Usuario> findByActivo(Boolean activo);
-    boolean existsByUsername(String username);
-    boolean existsByEmail(String email);
-    List<Usuario> findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(String nombre, String apellido);
+
+    // Buscar por nombre que contenga texto (ignorar mayúsculas/minúsculas)
+    List<Usuario> findByNombreContainingIgnoreCase(String texto);
+
+    // Verificar existencia por correo
+    boolean existsByCorreo(String correo);
 }
