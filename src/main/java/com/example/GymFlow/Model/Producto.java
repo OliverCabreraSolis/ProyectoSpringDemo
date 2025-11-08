@@ -1,65 +1,52 @@
 package com.example.GymFlow.Model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "productos")
-
+@Table(name = "producto")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_producto")
+    private Integer idProducto;
 
-    @Column(nullable = false, length = 150)
+    @ManyToOne
+    @JoinColumn(name = "id_tipo")
+    private TipoProducto tipoProducto;
+
+    @Column(nullable = false, length = 200)
     private String nombre;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Tipo tipo;
-
-    @Column(nullable = false)
-    private Double precio;
-
-    @Column(length = 500)
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(nullable = false)
-    private Boolean disponible = true;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal precio;
 
-    @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal cantidad;
 
-    public enum Tipo {
-        SUPLEMENTO, BEBIDA, ACCESORIO, ROPA
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        fechaRegistro = LocalDateTime.now();
-    }
-
+    // Constructores
     public Producto() {}
 
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Integer getIdProducto() { return idProducto; }
+    public void setIdProducto(Integer idProducto) { this.idProducto = idProducto; }
+
+    public TipoProducto getTipoProducto() { return tipoProducto; }
+    public void setTipoProducto(TipoProducto tipoProducto) { this.tipoProducto = tipoProducto; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public Tipo getTipo() { return tipo; }
-    public void setTipo(Tipo tipo) { this.tipo = tipo; }
-
-    public Double getPrecio() { return precio; }
-    public void setPrecio(Double precio) { this.precio = precio; }
-
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public Boolean getDisponible() { return disponible; }
-    public void setDisponible(Boolean disponible) { this.disponible = disponible; }
+    public BigDecimal getPrecio() { return precio; }
+    public void setPrecio(BigDecimal precio) { this.precio = precio; }
 
-    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
-    public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public BigDecimal getCantidad() { return cantidad; }
+    public void setCantidad(BigDecimal cantidad) { this.cantidad = cantidad; }
 }

@@ -1,54 +1,32 @@
 package com.example.GymFlow.Model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "tipos_productos")
+@Table(name = "tipo_producto")
 public class TipoProducto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_tipo")
+    private Integer idTipo;
 
-    @Column(nullable = false, unique = true, length = 100)
-    private String nombre;
+    @Column(name = "nombre_tipo", nullable = false, length = 200)
+    private String nombreTipo;
 
-    @Column(length = 500)
-    private String descripcion;
+    @Column(name = "descripcion_producto", columnDefinition = "TEXT")
+    private String descripcionProducto;
 
-    @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro;
-
-    @OneToMany(mappedBy = "tipo")
-    private List<Producto> productos;
-
-    @PrePersist
-    protected void onCreate() {
-        fechaRegistro = LocalDateTime.now();
-    }
-
+    // Constructores
     public TipoProducto() {}
 
-    public TipoProducto(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Integer getIdTipo() { return idTipo; }
+    public void setIdTipo(Integer idTipo) { this.idTipo = idTipo; }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getNombreTipo() { return nombreTipo; }
+    public void setNombreTipo(String nombreTipo) { this.nombreTipo = nombreTipo; }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-
-    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
-    public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
-
-    public List<Producto> getProductos() { return productos; }
-    public void setProductos(List<Producto> productos) { this.productos = productos; }
+    public String getDescripcionProducto() { return descripcionProducto; }
+    public void setDescripcionProducto(String descripcionProducto) { this.descripcionProducto = descripcionProducto; }
 }

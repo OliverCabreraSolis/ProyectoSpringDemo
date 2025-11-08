@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TipoProductoRepository extends JpaRepository<TipoProducto, Long> {
-    Optional<TipoProducto> findByNombre(String nombre);
-    boolean existsByNombre(String nombre);
-    List<TipoProducto> findByNombreContainingIgnoreCase(String nombre);
+public interface TipoProductoRepository extends JpaRepository<TipoProducto, Integer> {
+    Optional<TipoProducto> findByNombreTipo(String nombreTipo);
+    boolean existsByNombreTipo(String nombreTipo);
+    List<TipoProducto> findByNombreTipoContainingIgnoreCase(String nombreTipo);
 }

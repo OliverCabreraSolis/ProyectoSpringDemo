@@ -1,23 +1,35 @@
 package com.example.GymFlow.Model;
 import jakarta.persistence.*;
-@Entity
-@Table(name = "planes")
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
+@Entity
+@Table(name = "plan")
 public class Plan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_plan")
+    private Integer idPlan;
 
+    @Column(nullable = false, length = 200)
     private String nombre;
-    private String duracion;
-    private double precio;
 
-    @Column(length = 500)
+    @Column(nullable = false, length = 100)
+    private String duracion;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
+
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    // Getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // Constructores
+    public Plan() {}
+
+    // Getters y Setters
+    public Integer getIdPlan() { return idPlan; }
+    public void setIdPlan(Integer idPlan) { this.idPlan = idPlan; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
@@ -25,8 +37,8 @@ public class Plan {
     public String getDuracion() { return duracion; }
     public void setDuracion(String duracion) { this.duracion = duracion; }
 
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
+    public BigDecimal getPrecio() { return precio; }
+    public void setPrecio(BigDecimal precio) { this.precio = precio; }
 
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }

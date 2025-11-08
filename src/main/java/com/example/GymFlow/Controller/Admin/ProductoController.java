@@ -1,7 +1,6 @@
 package com.example.GymFlow.Controller.Admin;
 
 import com.example.GymFlow.Model.Producto;
-import com.example.GymFlow.Model.Producto.Tipo;
 import com.example.GymFlow.Service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +75,7 @@ public class ProductoController {
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            productoService.eliminar(id);
+            productoService.eliminar(idProducto);
             redirectAttributes.addFlashAttribute("mensaje", "Producto eliminado");
             redirectAttributes.addFlashAttribute("tipo", "success");
         } catch (Exception e) {

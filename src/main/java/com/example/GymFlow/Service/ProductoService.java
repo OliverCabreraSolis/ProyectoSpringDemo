@@ -1,8 +1,9 @@
 package com.example.GymFlow.Service;
 
 import com.example.GymFlow.Model.Producto;
-import com.example.GymFlow.Model.Producto.Tipo;
+import com.example.GymFlow.Model.TipoProducto;
 import com.example.GymFlow.Repository.ProductoRepository;
+import com.example.GymFlow.Repository.TipoProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +17,23 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
+    @Autowired
+    private TipoProductoRepository tipoProductoRepository;
+
     public List<Producto> obtenerTodos() {
         return productoRepository.findAll();
     }
 
-    public Optional<Producto> obtenerPorId(Long id) {
+    public Optional<Producto> obtenerPorId(Integer id) {
         return productoRepository.findById(id);
     }
 
-    public List<Producto> obtenerPorTipo(Tipo tipo) {
-        return productoRepository.findByTipo(tipo);
+    public List<Producto> obtenerPorTipo(Integer idTipo) {
+        return productoRepository.findByTipoProducto_IdTipo(idTipo);
+    }
+
+    public List<Producto> obtenerPorNombreTipo(String nombreTipo) {
+        return productoRepository.findByTipoProducto_NombreTipo(nombreTipo);
     }
 
     public List<Producto> buscarPorNombre(String nombre) {
@@ -36,20 +44,20 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public Producto actualizar(Long id, Producto productoActualizado) {
+    public Producto actualizar(Integer id, Producto productoActualizado) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
         producto.setNombre(productoActualizado.getNombre());
-        producto.setTipo(productoActualizado.getTipo());
+        producto.setTipoProducto(productoActualizado.getTipoProducto());
         producto.setPrecio(productoActualizado.getPrecio());
         producto.setDescripcion(productoActualizado.getDescripcion());
-        producto.setDisponible(productoActualizado.getDisponible());
+        producto.setCantidad(productoActualizado.getCantidad());
 
         return productoRepository.save(producto);
     }
 
-    public void eliminar(Long id) {
+    public void eliminar(Integer id) {
         if (!productoRepository.existsById(id)) {
             throw new RuntimeException("Producto no encontrado");
         }
