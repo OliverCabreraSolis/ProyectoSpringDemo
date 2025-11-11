@@ -6,38 +6,61 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PaginasControllerAdmin {
 
-    @GetMapping("/ver-membresiasInicio")
-    public String mostrarMembresiasInicio() {
-        return "admin/membresiasInicio";
-    }
-// TODO ADMIN
-    @GetMapping("/ver-anuncio")
-    public String mostrarAnuncio() {
-        return "usuario/anuncio";
+    //Métricas
+    @GetMapping("/ver-metricasInicio")
+    public String mostrarMetricasInicio() {
+        return "admin/Metricas/metricas";
     }
 
-    @GetMapping("/ver-contacto")
-    public String mostrarContacto() {
-        return "usuario/contacto";
+    @GetMapping("/ver-metricaEvSuscripciones")
+    public String mostrarMetricaEvSuscripciones() {
+        return "admin/Metricas/metricaEvolucionSuscripciones";
     }
 
-    @GetMapping("/ver-login")
-    public String mostrarLogin() {
-        return "login/login";
+    @GetMapping("/ver-metricaMetPago")
+    public String mostrarMetricaMetPago() {
+        return "admin/Metricas/metricaMetodosPago";
     }
 
-    @GetMapping("/ver-membresias")
-    public String mostrarMembresias() {
-        return "usuario/membresias";
+    @GetMapping("/ver-metricaTasaRenov")
+    public String mostrarMetricaTasaRenov() {
+        return "admin/Metricas/metricaTasaRenovacion";
     }
 
-    @GetMapping("/ver-pagos")
-    public String mostrarPagos() {
-        return "usuario/pagos";
+    //CRUDs
+    @GetMapping("/ver-CRUDsInicio")
+    public String mostrarCRUDsInicio() {
+        return "admin/CRUDs/CRUDs";
     }
 
-    @GetMapping("/ver-productos")
-    public String mostrarProductos() {
-        return "usuario/productosCRUD";
+    @GetMapping("/ver-CRUDPlanes")
+    public String mostrarCRUDPlanes() {
+        return "admin/CRUDs/planesCRUD";
+    }
+
+    @GetMapping("/ver-CRUDMembresias")
+    public String mostrarCRUDMembresias() {
+        return "admin/CRUDs/membresiasCRUD";
+    }
+
+    @GetMapping("/ver-CRUDTipoProducto")
+    public String mostrarCRUDTipoProducto() {
+        return "admin/CRUDs/TipoProductoCRUD";
+    }
+
+    @GetMapping("/ver-CRUDProductos")
+    public String mostrarCRUDProductos() {
+        return "admin/CRUDs/productosCRUD";
+    }
+
+    @GetMapping("/ver-CRUDUsuarios")
+    public String mostrarCRUDUsuarios() {
+        return "admin/CRUDs/usuariosCRUD";
+    }
+
+    //Gestión
+    @GetMapping("/ver-gestionInicio")
+    public String mostrarGestionInicio() {
+        return "admin/Gestion/gestionInicio";
     }
 }
