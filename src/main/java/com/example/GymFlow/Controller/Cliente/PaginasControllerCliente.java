@@ -1,10 +1,10 @@
-package com.example.GymFlow.Controller;
+package com.example.GymFlow.Controller.Cliente;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PaginasController {
+public class PaginasControllerCliente {
 
     @GetMapping("/ver-inicio")
     public String mostrarInicio() {
@@ -38,6 +38,6 @@ public class PaginasController {
 
     @GetMapping("/ver-productos")
     public String mostrarProductos() {
-        return "usuario/productosCRUD";
+        return "usuario/productos";
     }
 }
